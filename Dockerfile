@@ -1,10 +1,17 @@
-FROM linkyard/alpine-helm:2.16.6
+FROM linkyard/alpine-helm:2.16.7
 LABEL maintainer "mario.siegenthaler@linkyard.ch"
+
+ARG KUBECTL_SOURCE=kubernetes-release/release
+ENV KUBECTL_ARCH="linux/amd64"
 
 RUN apk add --update --upgrade --no-cache jq bash curl git gettext libintl
 
-ENV KUBERNETES_VERSION 1.16.9
-RUN curl -L -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl; \
+ARG KUBECTL_TRACK=stable.txt
+
+RUN apk add --no-cache --update ca-certificates curl jq
+
+RUN KUBECTL_VERSION=$(curl -SsL --retry 5 "https://storage.googleapis.com/${KUBECTL_SOURCE}/${KUBECTL_TRACK}") && \
+  curl -SsL --retry 5 "https://storage.googleapis.com/${KUBECTL_SOURCE}/${KUBECTL_VERSION}/bin/${KUBECTL_ARCH}/kubectl" > /usr/local/bin/kubectl && \
   chmod +x /usr/local/bin/kubectl
 
 ADD assets /opt/resource
