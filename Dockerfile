@@ -1,4 +1,4 @@
-FROM 046223933678.dkr.ecr.us-east-1.amazonaws.com/helm:base2.16.11
+FROM 046223933678.dkr.ecr.us-east-1.amazonaws.com/helm:base2.16.12
 
 ARG KUBECTL_SOURCE=kubernetes-release/release
 ENV KUBECTL_ARCH="linux/amd64"
