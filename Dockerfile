@@ -1,4 +1,4 @@
-FROM linkyard/alpine-helm:2.16.7
+FROM 046223933678.dkr.ecr.us-east-1.amazonaws.com/helm:base2.6.11
 
 ARG KUBECTL_SOURCE=kubernetes-release/release
 ENV KUBECTL_ARCH="linux/amd64"
