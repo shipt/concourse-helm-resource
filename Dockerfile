@@ -18,6 +18,6 @@ RUN mkdir -p "$(helm home)/plugins"
 RUN helm plugin install https://github.com/databus23/helm-diff && \
   helm plugin install https://github.com/rimusz/helm-tiller
 
-RUN apk del curl jq git
+RUN apk del curl git
 
 ENTRYPOINT [ "/bin/bash" ]
