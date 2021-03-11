@@ -1,0 +1,29 @@
+kind: pipeline
+name: test
+workspace:
+  base: /go
+  path: src/github.com/shipt/concourse-helm-resource
+
+trigger:
+  event:
+    - push
+    - pull_request
+    - tag
+
+steps:
+  - name: docker-prep
+    image: harbor.shipttech.com/plugins/dockerspec
+    pull: always
+  - name: docker-build-and-push
+    image: plugins/docker
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+    settings:
+      build_args_from_env:
+        - GITHUB_TOKEN
+      registry: harbor.shipttech.com
+      username: drone
+      password:
+        from_secret: harbor_drone_pass
+      env_file: "docker_args"

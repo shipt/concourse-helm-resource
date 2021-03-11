@@ -1,8 +1,9 @@
 language: go
+team: delivery
 deploy:
   pipeline: docker-image
   group: platform
-  production:
+  environments:
+  - name: production
     releaseStrategy:
-      branch: main
       tagFormat: semver

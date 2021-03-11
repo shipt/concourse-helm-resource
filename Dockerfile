@@ -1,6 +1,6 @@
 FROM alpine:3
 
-ARG HELM_VERSION=2.16.12
+ARG HELM_VERSION=2.17.0
 
 # ENV BASE_URL="https://storage.googleapis.com/kubernetes-helm"
 ENV BASE_URL="https://get.helm.sh"
